@@ -134,3 +134,12 @@ body {
 	border-left: 3px solid #ed1f24;
 	padding: 20px;
 }
+
+footer {
+	text-align: center;
+}
+
+footer p {
+	color: #777;
+}
+
