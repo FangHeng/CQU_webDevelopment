@@ -3,11 +3,6 @@
 	--main-text-color: #888888;
 }
 
-[data-theme="dark"] {
-	--main-bg-color: #1e1f26;
-	--main-text-color: #ccc;
-}
-
 * {
 	box-sizing: border-box;
 	/* 		transition: all ease 0.2s; */
@@ -42,7 +37,7 @@ body {
 	justify-content: center;
 	align-items: center;
 	background-color: var(--main-bg-color);
-	background-image: url("https://imvpn22.github.io/analog-clock/clock.png");
+	background-image: url("clock.png");
 	background-position: center center;
 	background-size: cover;
 	border-radius: 50%;

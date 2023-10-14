@@ -1,0 +1,241 @@
+{% load static %}
+<!doctype html>
+<!--[if IE 8]>
+<html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+    <title>实验3：网页版照片浏览器的设计与实现</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="shortcut icon" href="{% static "img/Web-icon.png" %}"/>
+    {#<link rel="apple-touch-icon" href="core/images/apple-touch-icon.png" />#}
+    <link rel="stylesheet" href="{% static "css/style.css" %}"/>
+    <link rel="stylesheet" href="{% static "css/default.css" %}"/>
+    <!-- Dropzone CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.css"/>
+    <style>
+        .dropzone {
+            border: 2px solid rgb(0 0 0 / 3%);
+            background: white;
+            color: lightgrey;
+            font-family: "Arial", sans-serif;
+        / / 设置字体为Arial
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{% static "js/modernizr-2.0.6.min.js" %}"></script>
+    <script src="{% static "js/jquery-1.6.2.min.js" %}"></script>
+    <script src="{% static "js/jquery.easing.js" %}"></script>
+    <script src="{% static "js/jquery.color.js" %}"></script>
+    <script src="{% static "js/head.min.js" %}"></script>
+    <script src="{% static "js/underscore-min.js" %}"></script>
+    <script src="{% static "js/underscore.string.js" %}"></script>
+    <script src="{% static "js/jquery.fancybox.pack.js" %}"></script>
+    <script src="{% static "js/layout.js" %}"></script>
+    <script src="{% static "js/rising.js" %}"></script>
+    <script src="{% static "/js/main.js" %}"></script>
+    <script src="{% static "js/responsive.js" %}"></script>
+</head>
+<body id="upload">
+<div id="wrap">
+
+    <!-- + -->
+
+    <header role="banner">
+        <section id="site-logo"><img alt="Rising" src="{% static "img/logo.png" %}"/></section>
+        <section id="nav-wrap">
+            <div class="bg"><span class="tip left"></span><span class="tip right"></span></div>
+            <a class="button home" href="{% url 'index' %}"><span></span></a>
+
+            <nav role="navigation">
+                <ul>
+                    <li><a href="{% url 'index' %}">主页</a></li>
+                    <li><a href="{% url 'upload' %}">图片上传</a></li>
+                    <li><a href="{% url 'gallery' %}">图片展览</a></li>
+                </ul>
+            </nav>
+        </section><!-- navigation -->
+    </header><!-- header -->
+
+    <!-- + -->
+
+    <div id="content" role="main">
+
+        <hgroup id="page-title">
+            <h1>图片上传</h1>
+            <h2>在这里，我们可以自由地选择图片文件进行上传和保存。图片会保存在web运行服务器中，相关信息也会被自动的提取。图片展示在<a
+                    href="{% url 'gallery' %}">“图片展览”</a>板块进行展示。</h2>
+        </hgroup><!-- page-title -->
+
+        <div id="content-wrap" class="clearfix">
+            <div id="main" data-align="left">
+
+                <div class="post">
+                    {#                    <div class="content excerpt">#}
+                    {#                        <p>The Bauhaus was a school whose approach to design and the combination of fine art and arts#}
+                    {#                            and crafts proved to be a major#}
+                    {#                            influence on the development of graphic design as well as much of 20th century modern#}
+                    {#                            art. </p>#}
+                    {#                        <blockquote>#}
+                    {#                            <p>Founded by Walter Gropius in Weimar, Germany in 1919, the school moved to Dessau in 1924#}
+                    {#                                and then was forced to close#}
+                    {#                                its doors, under pressure from the Nazis.</p>#}
+                    {#                        </blockquote>#}
+                    {#                    </div><!-- .content -->#}
+
+                    <h3 class="section-heading">选择文件</h3>
+                    <div class="content excerpt">
+                        <blockquote>
+                            <p>
+                                在这里选择图片并输入基本信息，点击“上传”按钮即可完成图片上传。
+                            </p>
+                        </blockquote>
+                    </div>
+                    <hr class="sep"/>
+                    <form class="forms-sample" action="/upload_files/" method="post" name="post-form"
+                          enctype="multipart/form-data">
+                        <p><input type="text" id="title" name="title" placeholder="图片标题"
+                                  onfocus="clearPlaceholder(this)" onblur="restorePlaceholder(this, '图片标题')"/></p>
+                        <p><input type="text" id="description" name="description" placeholder="请输入文字描述"
+                                  onfocus="clearPlaceholder(this)" onblur="restorePlaceholder(this, '请输入文字描述')"/>
+                        </p>
+                        <div class="dropzone" id="my-dropzone"></div>
+                        <p><input type="submit" value="提交"/></p>
+                    </form><!-- commentform --></div><!-- comments -->
+            </div><!-- .post -->
+
+            <!-- + -->
+
+        </div><!-- main -->
+
+        <!-- + -->
+
+    </div><!-- content-wrap -->
+
+    <!-- + -->
+
+    <footer role="contentinfo">
+        <div class="column-grid cols-4 clearfix">
+            <div class="entry column">
+
+                <aside class="widget widget_recent_comments">
+                    <h2 class="title"><span>开发者</span></h2>
+                    <ul>
+                        <li>FangHeng, 大数据与软件学院本2021级软件工程03班</li>
+                    </ul>
+                </aside><!-- .widget -->
+
+            </div><!-- .column -->
+
+        </div>
+        <div class="ftr-bottom">
+            <small>
+                &copy;2023 <a href=""> PhotoGallery</a>.
+                Coded by FangHeng. All Rights Reserved.
+            </small>
+        </div>
+    </footer><!-- footer -->
+
+</div><!-- wrap -->
+
+<script>
+    function clearPlaceholder(input) {
+        input.placeholder = '';
+    }
+
+    function restorePlaceholder(input, text) {
+        input.placeholder = text;
+    }
+</script>
+
+<script>
+    Rising.theme = 'default';
+    Rising.colors = {
+        postTitleHover: '#EB5426',
+        footerLinkHover: '#FF973F',
+        frameHover: '#EA7716',
+        lightboxBg: '#F7F7F7',
+        sourceCodeBg: '#FCFCFC'
+    };
+</script>
+
+<script>
+    // 使用自定义选项初始化Dropzone实例
+    Dropzone.options.myDropzone = {
+        paramName: 'file', // 指定后端接收文件的参数名称
+        url: "/upload_files/", // 指定文件上传的URL
+        parallelUploads: 50,
+        maxFiles: 1, // 限制上传的文件数量
+        uploadMultiple: true, // 开启一次性上传多个文件
+
+        // 设置接受的文件类型为图片和视频
+        acceptedFiles: 'image/jpg,image/jpeg,image/png,image/gif,image/bmp',
+
+        // 设置中文提示文本
+        dictDefaultMessage: "拖放文件到此处上传，请上传图片的文件", // 默认提示文本
+        dictFallbackMessage: "您的浏览器不支持拖放上传", // 浏览器不支持拖放上传的提示文本
+        dictFileTooBig: "文件太大 ({{filesize}}MB)，请上传小于{{maxFilesize}}MB的文件", // 文件过大的错误提示文本
+        dictInvalidFileType: "不支持该文件类型", // 不支持的文件类型的错误提示文本
+
+        autoProcessQueue: false, // 不立即上传文件
+
+        init: function () {
+            var myDropzone = this;
+
+
+            // 监听表单的提交事件
+            document.querySelector("form[name='post-form']").addEventListener("submit", function (e) {
+                e.preventDefault(); // 阻止表单默认的提交行为
+
+                var formData = new FormData(this); // 创建一个新的表单数据对象，包含了表单中的所有字段
+
+                // 遍历Dropzone中的所有文件，将它们添加到表单数据中
+                myDropzone.files.forEach(function (file) {
+                    formData.append(myDropzone.options.paramName, file);
+                });
+
+                // 使用AJAX提交表单数据
+                var xhr = new XMLHttpRequest();
+                xhr.open(this.method, this.action, true);
+                xhr.onload = function () {
+                    if (xhr.status >= 200 && xhr.status < 400) {
+                        // 请求成功，可以在这里处理服务器的响应
+                        var response = JSON.parse(xhr.responseText);
+                        if (response.status === 'success') {
+                            // 上传成功，显示成功消息
+                            Swal.fire(
+                                '成功!',
+                                '您的文件已成功上传。',
+                                'success'
+                            ).then(function () {
+                                // 成功后跳转到主页
+                                window.location.href = "/index/";
+                            });
+                        } else if (response.status === 'error') {
+                            // 上传失败，显示错误消息
+                            Swal.fire(
+                                '错误!',
+                                response.message,
+                                'error'
+                            ).then(function () {
+                                // 失败后刷新页面
+                                location.reload();
+                            });
+                        }
+                    } else {
+                        // 请求失败，可以在这里处理错误
+                    }
+                };
+                xhr.send(formData); // 发送请求
+
+                // 开始文件上传
+                myDropzone.processQueue();
+            });
+        }
+    };
+</script>
+<!-- Analytics -->
+</body>
+</html>

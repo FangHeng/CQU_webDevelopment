@@ -1,0 +1,345 @@
+{% load static %}
+<!doctype html>
+<!--[if IE 8]>
+<html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+    <title>实验3：网页版照片浏览器的设计与实现</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="shortcut icon" href="{% static "img/Web-icon.png" %}"/>
+    {#<link rel="apple-touch-icon" href="core/images/apple-touch-icon.png" />#}
+    <link rel="stylesheet" href="{% static "css/style.css" %}"/>
+    <link rel="stylesheet" href="{% static "css/default.css" %}"/>
+    <script src="{% static "js/modernizr-2.0.6.min.js" %}"></script>
+    <script src="{% static "js/jquery-1.6.2.min.js" %}"></script>
+    <script src="{% static "js/jquery.easing.js" %}"></script>
+    <script src="{% static "js/jquery.color.js" %}"></script>
+    <script src="{% static "js/head.min.js" %}"></script>
+    <script src="{% static "js/underscore-min.js" %}"></script>
+    <script src="{% static "js/underscore.string.js" %}"></script>
+    <script src="{% static "js/jquery.fancybox.pack.js" %}"></script>
+    <script src="{% static "js/layout.js" %}"></script>
+    <script src="{% static "js/rising.js" %}"></script>
+    <script src="{% static "/js/main.js" %}"></script>
+    <script src="{% static "js/responsive.js" %}"></script>
+</head>
+<body id="portfolio">
+<div id="wrap">
+
+    <!-- + -->
+
+    <header role="banner">
+        <section id="site-logo"><img alt="Rising" src="{% static "img/logo.png" %}"/></section>
+        <section id="nav-wrap">
+            <div class="bg"><span class="tip left"></span><span class="tip right"></span></div>
+            <a class="button home" href="{% url 'index' %}"><span></span></a>
+
+            <nav role="navigation">
+                <ul>
+                    <li><a href="{% url 'index' %}">主页</a></li>
+                    <li><a href="{% url 'upload' %}">图片上传</a></li>
+                    <li><a href="{% url 'gallery' %}">图片展览</a></li>
+                </ul>
+            </nav>
+        </section><!-- navigation -->
+    </header><!-- header -->
+
+    <!-- + -->
+
+    <div id="content" role="main">
+
+        <hgroup id="page-title">
+            <h1>图片展示</h1>
+            <h2>在这里会给出已经上传的图片的展览，默认以上传顺序排列。可以更改筛选条件或者排序条件。</h2>
+        </hgroup><!-- page-title -->
+
+        <hgroup id="page-title">
+            <h3>条件排序/筛选</h3>
+            <h2>请选择筛选的条件：</h2>
+            <label for="sort-condition">排序条件：</label>
+            <select id="sort-condition" name="sort-condition">
+                <option value="time" {% if selected_condition == "time" %}selected{% endif %}>拍摄时间</option>
+                <option value="upload_date" {% if selected_condition == "upload_date" %}selected{% endif %}>上传日期
+                </option>
+            </select>
+
+            <label for="sort-order">排序方式：</label>
+            <select id="sort-order" name="sort-order">
+                <option value="asc" {% if selected_order == "asc" %}selected{% endif %}>升序</option>
+                <option value="desc" {% if selected_order == "desc" %}selected{% endif %}>降序</option>
+            </select>
+            <br>
+
+            <!-- Country Dropdown -->
+            <label for="country-filter">国家筛选：</label>
+            <select id="country-filter" name="country">
+                <option value="" {% if not selected_country %}selected{% endif %}>全部</option>
+                {% for country in countries %}
+                    <option value="{{ country }}"
+                            {% if selected_country == country %}selected{% endif %}>{{ country }}</option>
+                {% endfor %}
+            </select>
+
+            <!-- Province Dropdown -->
+            <label for="province-filter">省份筛选：</label>
+            <select id="province-filter" name="province">
+                <option value="" {% if not selected_province %}selected{% endif %}>全部</option>
+                {% for province in provinces %}
+                    <option value="{{ province }}"
+                            {% if selected_province == province %}selected{% endif %}>{{ province }}</option>
+                {% endfor %}
+            </select>
+
+            <!-- City Dropdown -->
+            <label for="city-filter">城市筛选：</label>
+            <select id="city-filter" name="city">
+                <option value="" {% if not selected_city %}selected{% endif %}>全部</option>
+                {% for city in cities %}
+                    <option value="{{ city }}" {% if selected_city == city %}selected{% endif %}>{{ city }}</option>
+                {% endfor %}
+            </select>
+
+            <!-- District Dropdown -->
+            <label for="district-filter">区县筛选：</label>
+            <select id="district-filter" name="district">
+                <option value="" {% if not selected_district %}selected{% endif %}>全部</option>
+                {% for district in districts %}
+                    <option value="{{ district }}"
+                            {% if selected_district == district %}selected{% endif %}>{{ district }}</option>
+                {% endfor %}
+            </select>
+
+
+            <!-- ... 后面的代码 ... -->
+
+
+        </hgroup><!-- page-title -->
+        <!-- + -->
+
+        <div class="column-grid special cols-3 clearfix">
+            {% for column in files_cols %}
+                <ul class="column nostyle entry">
+                    {% for file in column %}
+                        <li class="entry">
+                            <div class="frame">
+                                <img alt="{{ file.file_name }}" width="278" height="142"
+                                     src="{% static file.file_url %}"/>
+                                <a data-lightbox="image" class="plus" href="{% static file.file_url %}"></a>
+                                <span class="overlay"></span>
+                            </div>
+                            <div class="content">
+                                <div class="wrap">
+                                    <h1 class="post-title"><a href="#permalink">{{ file.file_name }}</a></h1>
+                                    <h2 class="post-title">图片描述：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </h2>
+                                    <p>{{ file.remarks }}</p>
+                                    <h2 class="post-title">拍摄地点：</h2>
+                                    <p>{{ file.country }} {{ file.province }} {{ file.city }} {{ file.district }}</p>
+                                    <h2 class="post-title">拍摄时间：</h2>
+                                    <p>{{ file.time }}</p>
+                                </div>
+                            </div>
+                        </li><!-- .entry -->
+                    {% endfor %}
+                </ul><!-- column -->
+            {% endfor %}
+
+        </div><!-- .column-grid -->
+    </div>
+
+    <!-- + -->
+
+    <footer role="contentinfo">
+        <div class="column-grid cols-4 clearfix">
+            <div class="entry column">
+
+                <aside class="widget widget_recent_comments">
+                    <h2 class="title"><span>开发者</span></h2>
+                    <ul>
+                        <li>FangHeng, 大数据与软件学院本2021级软件工程03班</li>
+                    </ul>
+                </aside><!-- .widget -->
+
+            </div><!-- .column -->
+
+        </div>
+        <div class="ftr-bottom">
+            <small>
+                &copy;2023 <a href=""> PhotoGallery</a>.
+                Coded by FangHeng. All Rights Reserved.
+            </small>
+        </div>
+    </footer><!-- footer -->
+
+</div><!-- wrap -->
+
+<script>
+    Rising.theme = 'default';
+    Rising.colors = {
+        postTitleHover: '#EB5426',
+        footerLinkHover: '#FF973F',
+        frameHover: '#EA7716',
+        lightboxBg: '#F7F7F7',
+        sourceCodeBg: '#FCFCFC'
+    };
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // 获取下拉框元素
+        const sortCondition = document.getElementById("sort-condition");
+        const sortOrder = document.getElementById("sort-order");
+
+        function handleSortChange() {
+            // 获取当前选中的排序条件和排序方式
+            const condition = sortCondition.value;
+            const order = sortOrder.value;
+
+            // 重定向到同一个页面，但带有新的查询参数
+            window.location.href = `/gallery/?condition=${condition}&order=${order}`;
+        }
+
+        // 绑定事件监听器
+        sortCondition.addEventListener("change", handleSortChange);
+        sortOrder.addEventListener("change", handleSortChange);
+    });
+</script>
+
+<script>
+    function getQueryParam(key) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(key) || '';
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const countryFilter = document.getElementById("country-filter");
+        const provinceFilter = document.getElementById("province-filter");
+        const cityFilter = document.getElementById("city-filter");
+        const districtFilter = document.getElementById("district-filter");
+
+        function fetchLocationData(param, callback) {
+            fetch(`/get_location_data/?${param}`)
+                .then(response => response.json())
+                .then(data => {
+                    callback(data);
+                    // 每次获取新数据后都保存当前所有下拉框的数据
+                    saveAllDropdownsToStorage();
+                })
+                .catch(error => console.error('Error fetching location data:', error));
+        }
+
+        function updateGallery() {
+            const selectedCountry = countryFilter.value;
+            const selectedProvince = provinceFilter.value;
+            const selectedCity = cityFilter.value;
+            const selectedDistrict = districtFilter.value;
+
+            window.location.href = `/gallery/?country=${selectedCountry}&province=${selectedProvince}&city=${selectedCity}&district=${selectedDistrict}`;
+        }
+
+        // 将所有下拉框数据保存到sessionStorage
+        function saveAllDropdownsToStorage() {
+            sessionStorage.setItem('countries', JSON.stringify(Array.from(countryFilter.options).map(o => o.value)));
+            sessionStorage.setItem('provinces', JSON.stringify(Array.from(provinceFilter.options).map(o => o.value)));
+            sessionStorage.setItem('cities', JSON.stringify(Array.from(cityFilter.options).map(o => o.value)));
+            sessionStorage.setItem('districts', JSON.stringify(Array.from(districtFilter.options).map(o => o.value)));
+
+        }
+
+
+        // 从sessionStorage恢复下拉框数据
+        function populateDropdownFromStorage(dropdown, storageKey) {
+            const storedData = JSON.parse(sessionStorage.getItem(storageKey) || "[]");
+            dropdown.innerHTML = '<option value="">全部</option>';
+            storedData.forEach(item => {
+                if (item) {  // 防止插入空白选项
+                    const option = document.createElement('option');
+                    option.value = item;
+                    option.textContent = item;
+                    dropdown.appendChild(option);
+                }
+            });
+        }
+
+        // 我们可以通过检查一个特定的sessionStorage键来确定这是否是首次加载。
+        if (!sessionStorage.getItem('pageLoadedOnce')) {
+            // 标记页面已加载
+            sessionStorage.setItem('pageLoadedOnce', 'true');
+        } else {
+            // 如果不是首次加载，则从sessionStorage恢复所有下拉框数据
+            populateDropdownFromStorage(countryFilter, 'countries');
+            populateDropdownFromStorage(provinceFilter, 'provinces');
+            populateDropdownFromStorage(cityFilter, 'cities');
+            populateDropdownFromStorage(districtFilter, 'districts');
+        }
+
+        countryFilter.addEventListener('change', function () {
+            const selectedCountry = countryFilter.value;
+            provinceFilter.innerHTML = '<option value="">全部</option>';
+            cityFilter.innerHTML = '<option value="">全部</option>';
+            districtFilter.innerHTML = '<option value="">全部</option>';
+
+            fetchLocationData(`country=${selectedCountry}`, function (data) {
+                data['provinces'].forEach(province => {
+                    const option = document.createElement('option');
+                    option.value = province;
+                    option.textContent = province;
+                    provinceFilter.appendChild(option);
+                });
+                updateGallery();
+            });
+        });
+
+        provinceFilter.addEventListener('change', function () {
+            const selectedProvince = provinceFilter.value;
+            cityFilter.innerHTML = '<option value="">全部</option>';
+            districtFilter.innerHTML = '<option value="">全部</option>';
+
+            fetchLocationData(`province=${selectedProvince}`, function (data) {
+                data['cities'].forEach(city => {
+                    const option = document.createElement('option');
+                    option.value = city;
+                    option.textContent = city;
+                    cityFilter.appendChild(option);
+                });
+                updateGallery();
+            });
+        });
+
+        cityFilter.addEventListener('change', function () {
+            const selectedCity = cityFilter.value;
+            districtFilter.innerHTML = '<option value="">全部</option>';
+
+            fetchLocationData(`city=${selectedCity}`, function (data) {
+                data['districts'].forEach(district => {
+                    const option = document.createElement('option');
+                    option.value = district;
+                    option.textContent = district;
+                    districtFilter.appendChild(option);
+                });
+                updateGallery();
+            });
+        });
+
+        function setSelectedValueForDropdown(dropdown, value) {
+            for (let option of dropdown.options) {
+                if (option.value === value) {
+                    dropdown.value = value;
+                    return;
+                }
+            }
+        }
+
+        // 设置下拉菜单的初始值，基于URL的查询参数
+        setSelectedValueForDropdown(countryFilter, getQueryParam('country'));
+        setSelectedValueForDropdown(provinceFilter, getQueryParam('province'));
+        setSelectedValueForDropdown(cityFilter, getQueryParam('city'));
+        setSelectedValueForDropdown(districtFilter, getQueryParam('district'));
+
+    });
+</script>
+
+
+<!-- Analytics -->
+</body>
+</html>

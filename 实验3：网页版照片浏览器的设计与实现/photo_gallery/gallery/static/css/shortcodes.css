@@ -1,0 +1,39 @@
+
+/* Copyright (c) 2011 Ernesto Mendez <der-design.com> */
+
+/* COLUMNS */
+
+.column-4 { float: left; margin-right: 28px; width: 125px; min-height: 50px; }
+.column-3 { float: left; margin-right: 28px; width: 176px; min-height: 50px; }
+.column-2 { float: left; margin-right: 28px; width: 278px; min-height: 50px; }
+
+#content-wrap > article .column-4 { width: 204px; }
+#content-wrap > article .column-3 { margin-right: 27px; width: 282px; }
+#content-wrap > article .column-2 { width: 436px; }
+
+.column-4.last, .column-3.last, .column-2.last { margin-right: 0 !important; }
+.column-4 > *:first-child, .column-3 > *:first-child, .column-2 > *:first-child { margin-top: 0 !important; }
+
+/* TABS */
+
+.js ul.sc-tabs { }
+.js ul.sc-tabs > li.title { display: none; }
+.js ul.sc-tabs > li.nav { position: relative; display: block; margin-bottom: -1px; }
+.js ul.sc-tabs > li.nav span { display: block; font-weight: 300; padding: 5px 10px; border-right: solid 1px #d9d9d9; float: left; border: solid 1px #E7E7E7; margin-right: 4px; border-top-right-radius: 5px; border-top-left-radius: 5px;
+text-shadow: 0 1px 0 white;
+background: -webkit-gradient(linear, left top, left bottom, from(#fcfcfc), to(#f2f2f2)); /* Webkit */
+background: -moz-linear-gradient(top,  #fcfcfc,  #f2f2f2); /* Firefox */
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fcfcfc', endColorstr='#f2f2f2'); /* Internet Explorer */ }
+.js ul.sc-tabs > li.nav span:hover, .js ul.sc-tabs > li.nav span.active { background-color: #fefefe; color: #eb5426; cursor: pointer; }
+.js ul.sc-tabs > li.nav span.active { filter: none; background: #fefefe; border-bottom-color: #fefefe; font-weight: bold; color: #3f3f3f; }
+.js ul.sc-tabs > li.tab { display: none; padding: 10px 10px 15px; background-color: #fefefe; border: solid 1px #E7E7E7; }
+.js ul.sc-tabs > li.tab > *:first-child { margin-top: 0 !important; }
+.js ul.sc-tabs > li.nav + li { display: block; }
+
+.no-js ul.sc-tabs li.title { font-weight: bold; }
+
+/* NOTIFICATIONS */
+
+p.notification { padding: 15px 45px 15px 13px; background-color: #fffef5; border: solid 1px #fee3ae; color: #696868; margin: 1em 0; }
+p.notification.success { background-color: #efffed; border-color: #b4e3af; }
+p.notification.error { background-color: #ffeff0; border-color: #ffbabc; }

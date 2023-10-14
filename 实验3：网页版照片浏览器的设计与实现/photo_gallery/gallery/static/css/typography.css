@@ -1,0 +1,52 @@
+
+/* Copyright (c) 2011 Ernesto Mendez <der-design.com> */
+
+*:focus { outline: none; }
+
+h1,h2,h3,h4,h5,h6 { margin: 0 0 0 0; font-weight: 300; line-height: 1.3em; color: #3b3b39; }
+h1 { font-size: 1.9em; margin-bottom: 0.55em; }
+h2 { font-size: 1.7em; margin-bottom: 0.6em; }
+h3 { font-size: 1.5em; margin-bottom: 0.6em; }
+h4 { font-size: 1.3em; margin-bottom: 0.6em; }
+h5 { font-size: 1.1em; margin-bottom: 0.6em; }
+h6 { font-size: 1.0em; margin-bottom: 0.6em; }
+
+p, ul, ol, dl, pre { margin: 1.3em 0; }
+
+blockquote { border-left: solid 2px #f89c5f; }
+
+pre { font-size: 12px; background-color: #FCFCFC; padding: 10px; border: solid 1px #e7e7e7; border-radius: 3px; }
+code {  }
+
+dl dt { font-weight: bold; }
+dl dd { margin-bottom: 0.8em; }
+
+table { width: 100%; border-collapse: collapse; text-align: left; }
+th { font-size: 1.1em; font-weight: bold; color: #3b3b39; border-bottom: 2px solid #3b3b39; padding: 10px 8px; }
+td { border-bottom: 1px solid #e5e5e5; padding: 6px 8px; }
+tfoot td { border-bottom: none; }
+
+legend { display: none; }
+fieldset { padding: 1px 10px; margin: 1.5em 0; border: solid 1px #e5e5e5; border-radius: 4px; }
+input[type=text], input[type=password], input[type=email], input[type=url], input[type=tel], textarea {
+background-color: #fcfcfc; border: solid 1px #e0e0e0; padding: 8px 10px; min-width: 188px; font-weight: 300; color: #696868; }
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus, input[type=url]:focus, input[type=tel]:focus, textarea:focus, .sc-button:hover, input[type=submit]:hover, input[type=reset]:hover {
+border-color: #f89c5f;
+-webkit-box-shadow: 0 0 5px rgba(255,191,123,0.75);
+-moz-box-shadow: 0 0 5px rgba(255,191,123,0.75);
+box-shadow: 0 0 5px rgba(255,191,123,0.75); }
+form input::-webkit-input-placeholder { color: #696868; }
+
+a.sc-button { margin: 0 0 1.3em 12px; float: left; }
+.sc-button, input[type=submit], input[type=reset] { border: solid 1px #d9d9d9; padding: 7px 1.7em; border-radius: 3px; background: #fcfcfc; color: #3b3b39 !important;
+text-shadow: 0 1px 0 white;
+-webkit-box-shadow: 0 0 3px rgba(255,255,255,1) inset;
+-moz-box-shadow: 0 0 3px rgba(255,255,255,1) inset;
+box-shadow: 0 0 3px rgba(255,255,255,1) inset;
+background: -webkit-gradient(linear, left top, left bottom, from(#fcfcfc), to(#e2e2e2)); /* Webkit */
+background: -moz-linear-gradient(top,  #fcfcfc,  #e2e2e2); /* Firefox */
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fcfcfc', endColorstr='#e2e2e2'); /* Internet Explorer */ }
+
+.sc-button:hover, input[type=submit]:hover, input[type=reset]:hover { cursor: pointer; text-decoration: none; }
+
+abbr:hover { cursor: help; }

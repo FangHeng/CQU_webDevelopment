@@ -1,0 +1,122 @@
+
+/* Copyright (c) 2011 Ernesto Mendez <der-design.com> */
+
+/* SEARCH WIDGET */
+
+#secondary .widget.widget_search {  }
+#secondary .widget.widget_search p { margin: 0; }
+#secondary .widget.widget_search input[type=text] { display: block; width: 233px; padding: 10px 10px; color: #9f9e9a; }
+#secondary .widget.widget_search:first-child { padding-top: 26px; margin: -26px 0 -23px 0;  }
+
+#secondary .widget.widget_search input::-webkit-input-placeholder { color: #9f9e9a; }
+footer .widget.widget_search input::-webkit-input-placeholder { color: #969595; }
+
+/* SIDEBAR WIDGETS */
+
+#secondary .widget { margin-top: 50px; }
+#secondary .widget:first-child { margin-top: 0; }
+#secondary .widget h2.title { position: relative; display: inline-block; height: 34px; line-height: 34px; font-size: 15px; color: #dad9d4; text-shadow: 0 1px 1px rgba(0,0,0,0.39); width: 255px;
+background: url(../images/common-bg.jpg) repeat; padding: 0 41px 0 40px; margin: 0 0 24px -40px; letter-spacing: 0; }
+#secondary .widget h2.title + * { margin-top: 0 !important; }
+#secondary .widget ul li a { color: #2f2f2f; }
+.no-js #secondary .widget ul li a:hover { color: #EB5426; }
+#secondary .widget ul > li { margin-top: 0.5em; }
+#secondary .widget ul > li:first-child { margin-top: 0; }
+#secondary .widget h2.title:before { content: "\020"; position: absolute; display: block; width: 10px; height: 8px; bottom: -8px; background: url(../images/bottom-folds.png) no-repeat; }
+#main[data-align=left] + #secondary .widget h2.title {
+-webkit-box-shadow: -3px 3px 0 rgba(55,55,55,0.12);
+-moz-box-shadow: -3px 3px 0 rgba(55,55,55,0.12);
+box-shadow: -3px 3px 0 rgba(55,55,55,0.12); }
+#main[data-align=left] + #secondary .widget h2.title:before { right: 0; background-position: center right;  }
+#main[data-align=right] + #secondary .widget h2.title {
+-webkit-box-shadow: 3px 3px 0 rgba(55,55,55,0.12);
+-moz-box-shadow: 3px 3px 0 rgba(55,55,55,0.12);
+box-shadow: 3px 3px 0 rgba(55,55,55,0.12); }
+#main[data-align=right] + #secondary .widget h2.title:before { left: 0; background-position: center left; }
+
+/* RECENT POSTS WIDGET */
+
+#secondary .widget.widget_recent_entries ul li { padding-left: 23px; background: url(../images/post-icon.png) 0 3px no-repeat; }
+
+/* RECENT COMMENTS WIGDET */
+
+#secondary .widget.widget_recent_comments ul li { padding-left: 23px; background: url(../images/comment-small.png) 0 3px no-repeat;  }
+
+/* CALENDAR WIDGET */
+
+.widget.widget_calendar a { font-weight: bold; }
+.widget.widget_calendar a:hover { text-decoration: underline; }
+
+footer .widget table {  }
+footer .widget table th { color: #B8B4B2; border-bottom-color: #565656; }
+footer .widget table td { border-bottom-color: #565656; }
+
+/* FLICKR WIDGET */
+
+.widget.widget_flickr .flickr-gallery { width: 267px; margin-left: -6px; }
+.widget.widget_flickr .flickr-gallery > .flickr_badge_image { position: relative; width: 77px; height: 77px; float: left; margin: 12px 6px 0; }
+.widget.widget_flickr .flickr-gallery > .flickr_badge_image:first-child,
+.widget.widget_flickr .flickr-gallery > .flickr_badge_image:first-child + div,
+.widget.widget_flickr .flickr-gallery > .flickr_badge_image:first-child + div + div { margin-top: 0; }
+.widget.widget_flickr .flickr-gallery > .flickr_badge_image img { display: block; border: solid 4px #e7e7e7; width: 69px; height: 69px; }
+
+footer .widget.widget_flickr .flickr-gallery .flickr_badge_image { width: 62px; height: 62px; }
+footer .widget.widget_flickr .flickr-gallery .flickr_badge_image img { width: 54px; height: 54px; border-color: #5d5d5d; }
+
+/* PORTFOLIO WIDGET */
+
+.widget.widget_portfolio {  }
+.widget.widget_portfolio article { margin-top: 25px; }
+.widget.widget_portfolio article:first-child { margin-top: 0; }
+.widget.widget_portfolio article .frame + * { margin-top: 14px; }
+.widget.widget_portfolio article hgroup { text-align: center; }
+.widget.widget_portfolio article hgroup h2 { font-size: 14px; margin: 0 0 5px 0; }
+.widget.widget_portfolio article hgroup h2 a { color: #3f3f3f; }
+.widget.widget_portfolio article hgroup h3 { font-family: Georgia,serif; font-size: 12px; font-style: italic; color: #b7b5b5; margin: 0; }
+
+footer .widget.widget_portfolio article .frame img { width: 202px; height: auto !important; }
+footer .widget.widget_portfolio article hgroup h2 { font-size: 12px; }
+footer .widget.widget_portfolio article hgroup h2 a { color: #F4F0ED; }
+footer .widget.widget_portfolio article hgroup h3 { font-size: 11px; }
+
+/* VIDEO WIDGET */
+
+.widget.video_widget iframe, .widget.video_widget object { display: block; }
+
+/* FOOTER WIDGETS */
+
+footer .widget { margin-top: 28px; text-shadow: 0 0 1px rgba(0,0,0,0.1); line-height: 1.4em; }
+footer .widget:first-child { margin-top: 0; }
+footer .widget > h2.title:first-child { font-size: 15px; color: #F4F0ED; font-weight: bold; line-height: 1.3em; margin-bottom: 1.2em; }
+footer .widget > h2.title:first-child + * { margin-top: 0 !important; }
+footer .widget > h2.title:first-child span { display: inline-block; padding: 0 5px 7px 0; border-bottom: solid 1px #947152; margin-bottom: -1px; }
+.rgba footer .widget > h2.title:first-child { border-bottom: solid 1px rgba(255,255,255,0.1); }
+.no-rgba footer .widget > h2.title:first-child { border-bottom: solid 1px #565656; }
+
+.widget ul { padding-left: 0; }
+.widget ul li { list-style: none; margin-top: 0.5em; }
+.widget ul li:first-child { margin-top: 0; }
+
+/* TWITTER WIDGET */
+
+.widget.twitter_widget {  }
+.widget.twitter_widget ul { padding-bottom: 2px; }
+.widget.twitter_widget ul li { padding: 10px 0 0; margin-top: 10px; border-top: solid 1px; }
+.widget.twitter_widget ul li:first-child { padding-top: 0; border-top: none; }
+.widget.twitter_widget ul li small { display: block; font-size: 11px; }
+.widget.twitter_widget ul li small a { color: #918f8f; }
+.no-js .widget.twitter_widget ul li small a:hover { color: red; }
+.widget.twitter_widget a.follow { font-weight: bold; }
+
+.rgba .widget.twitter_widget ul li { border-top-color: rgba(255,255,255,0.08); }
+.no-rgba .widget.twitter_widget ul li { border-top-color: #555; }
+
+/* RECENT COMMENTS WIDGET */
+
+.widget_recent_comments ul {  }
+.widget_recent_comments ul li { font-size: 11px; }
+.widget_recent_comments ul li a { font-size: 13px; margin: 0 0.2em; }
+.widget_recent_comments ul li a:first-child { margin-left: 0; }
+
+footer .widget_recent_comments ul li { font-size: 11px; }
+footer .widget_recent_comments ul li a { font-size: 12px; }

@@ -1,0 +1,130 @@
+{% load static %}
+<!doctype html>
+<!--[if IE 8]> <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+<title>实验3：网页版照片浏览器的设计与实现</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="shortcut icon" href="{% static "img/Web-icon.png" %}" />
+{#<link rel="apple-touch-icon" href="core/images/apple-touch-icon.png" />#}
+<link rel="stylesheet" href="{% static "css/style.css" %}" />
+<link rel="stylesheet" href="{% static "css/default.css" %}" />
+<script src="{% static "js/modernizr-2.0.6.min.js" %}"></script>
+<script src="{% static "js/jquery-1.6.2.min.js" %}"></script>
+<script src="{% static "js/jquery.easing.js" %}"></script>
+<script src="{% static "js/jquery.color.js" %}"></script>
+<script src="{% static "js/head.min.js" %}"></script>
+<script src="{% static "js/underscore-min.js" %}"></script>
+<script src="{% static "js/underscore.string.js" %}"></script>
+<script src="{% static "js/jquery.fancybox.pack.js" %}"></script>
+<script src="{% static "js/layout.js" %}"></script>
+<script src="{% static "js/rising.js" %}"></script>
+<script src="{% static "/js/main.js" %}"></script>
+<script src="{% static "js/responsive.js" %}"></script>
+</head>
+<body id="home">
+<div id="wrap">
+
+<!-- + -->
+
+<header role="banner">
+	<section id="site-logo"><img alt="Rising" src="{% static "img/logo.png" %}" /></section>
+	<section id="nav-wrap">
+		<div class="bg"><span class="tip left"></span><span class="tip right"></span></div>
+		<a class="button home" href="{% url 'index' %}"><span></span></a>
+
+		<nav role="navigation">
+			<ul>
+				<li><a href="{% url 'index' %}">主页</a></li>
+				<li><a href="{% url 'upload' %}">图片上传</a></li>
+				<li><a href="{% url 'gallery' %}">图片展览</a></li>
+			</ul>
+		</nav>
+	</section><!-- navigation -->
+</header><!-- header -->
+
+<!-- + -->
+
+<div id="content" role="main">
+
+	<section id="slider" class="accordion" style="height: 372px;">
+
+<script src="{% static "js/jquery.kwicks-1.5.1.pack.js" %}"></script>
+<script>
+    Rising.sliderConfig = {
+        duration: 500,
+        easing: 'easeInOutSine'
+    }
+
+    Rising.sliderData = [];
+
+    {% for file in latest_files %}
+        Rising.sliderData.push({
+            title: '{{ file.file_name }}',
+            img: '{% static file.file_url %}',
+            url: '#slide-{{ forloop.counter }}'
+        });
+    {% endfor %}
+</script>
+
+
+
+<ul class="slides nostyle frame nohover" style="height: 372px;">
+    {% for file in latest_files %}
+        <li><img alt="{{ file.file_name }}" width="892" height="372" src="{% static file.file_url %}" /></li>
+    {% endfor %}
+</ul>
+
+	</section><!-- slider -->
+
+	<!-- + -->
+
+	<section id="quote">
+		<p>主页展示最近上传的五张图片的缩略图，详情请见”图片展览”页面</p>
+	</section>
+
+	<!-- + -->
+	
+</div><!-- content -->
+
+<!-- + -->
+
+<footer role="contentinfo">
+	<div class="column-grid cols-4 clearfix">
+		<div class="entry column">
+
+			<aside class="widget widget_recent_comments">
+				<h2 class="title"><span>开发者</span></h2>
+				<ul>
+					<li>FangHeng, 大数据与软件学院本2021级软件工程03班</li>
+				</ul>
+			</aside><!-- .widget -->
+
+		</div><!-- .column -->
+
+	</div>
+	<div class="ftr-bottom">
+		<small>
+			&copy;2023 <a href=""> PhotoGallery</a>.
+            Coded by FangHeng. All Rights Reserved.
+        </small>
+	</div>
+</footer><!-- footer -->
+
+</div><!-- wrap -->
+
+<script>
+Rising.theme = 'default';
+Rising.colors = {
+	postTitleHover: '#EB5426',
+	footerLinkHover: '#FF973F',
+	frameHover: '#EA7716',
+	lightboxBg: '#F7F7F7',
+	sourceCodeBg: '#FCFCFC'
+};
+</script>
+
+<!-- Analytics -->
+</body>
+</html>

@@ -1,0 +1,6 @@
+
+/* Styles to be dynamically generated */
+
+#site-logo { text-align: center; padding: 59px 0 36px 0; }
+nav[role=navigation] { text-align: left; }
+#home #quote { text-align: center; }
