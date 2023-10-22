@@ -12,70 +12,95 @@
     <meta charset="UTF-8">
     <title>实验5：利用ajax实现省市联动</title>
     <link rel="stylesheet" type="text/css" href="Province-to-City_style.css">
+    <script src="jquery.min.js"></script>
+
 </head>
 <body onLoad="initClock()">
 <div class="page-header">实验5：利用ajax实现省市联动</div>
 <ul class="nav">
     <li class="button-dropdown">
         <a href="javascript:void(0)" class="dropdown-toggle">
-            Dropdown 1 <span>▼</span>
+            选择省份 <span>▼</span>
         </a>
-        <ul class="dropdown-menu">
-            <li>
-                <a href="#">
-                    Drop Item 1
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    Drop Item 2
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    Drop Item 3
-                </a>
-            </li>
+        <ul class="dropdown-menu" id="province-menu">
+            <!-- 省份列表将在这里动态生成 -->
         </ul>
     </li>
     <li class="button-dropdown">
         <a href="javascript:void(0)" class="dropdown-toggle">
-            Dropdown 2 <span>▼</span>
+            选择城市 <span>▼</span>
         </a>
-        <ul class="dropdown-menu">
-            <li>
-                <a href="#">
-                    Drop Item 1
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    Drop Item 2
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    Drop Item 3
-                </a>
-            </li>
+        <ul class="dropdown-menu" id="city-menu">
+            <!-- 城市列表将在这里动态生成 -->
         </ul>
     </li>
     <li class="button-dropdown">
         <a href="javascript:void(0)" class="dropdown-toggle">
-            Dropdown 3 <span>▼</span>
+            选择区县 <span>▼</span>
         </a>
-        <ul class="dropdown-menu">
-            <li>
-                <a href="#">
-                    asdf
-                </a>
-            </li>
+        <ul class="dropdown-menu" id="district-menu">
+            <!-- 区县列表将在这里动态生成 -->
         </ul>
     </li>
 </ul>
 
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // 加载JSON文件并填充省份列表
+        $.getJSON('cityData.json', function (data) {
+            var provinces = data;
+            var provinceMenu = $('#province-menu');
+            $.each(provinces, function (index, province) {
+                var provinceOption = $('<li><a href="javascript:void(0)">' + province.n + '</a></li>');
+                provinceMenu.append(provinceOption);
+            });
+        });
+
+        // 当选择省份时，更新城市列表和省份标签，并重置城市和区县标签
+        $('#province-menu').on('click', 'li', function () {
+            var selectedProvince = $(this).text();
+            $('#province-menu').prev().text(selectedProvince + ' ▼');  // 更新省份标签
+            $('#city-menu').prev().text('选择城市 ▼');  // 重置城市标签
+            $('#district-menu').prev().text('选择区县 ▼');  // 重置区县标签
+            $.getJSON('cityData.json', function (data) {
+                var cities = data.find(province => province.n === selectedProvince).s;
+                var cityMenu = $('#city-menu');
+                cityMenu.empty();  // 清空城市列表
+                $.each(cities, function (index, city) {
+                    var cityOption = $('<li><a href="javascript:void(0)">' + city.n + '</a></li>');
+                    cityMenu.append(cityOption);
+                });
+            });
+            $('#district-menu').empty();  // 清空区县列表
+        });
+
+        // 当选择城市时，更新区县列表和城市标签，并重置区县标签
+        $('#city-menu').on('click', 'li', function () {
+            var selectedCity = $(this).text();
+            $('#city-menu').prev().text(selectedCity + ' ▼');  // 更新城市标签
+            $('#district-menu').prev().text('选择区县 ▼');  // 重置区县标签
+            var selectedProvince = $('#province-menu').prev().text().split(' ')[0];  // 从省份标签获取选中的省份
+            $.getJSON('cityData.json', function (data) {
+                var districts = data.find(province => province.n === selectedProvince)
+                    .s.find(city => city.n === selectedCity).s;
+                var districtMenu = $('#district-menu');
+                districtMenu.empty();  // 清空区县列表
+                $.each(districts, function (index, district) {
+                    var districtOption = $('<li><a href="javascript:void(0)">' + district.n + '</a></li>');
+                    districtMenu.append(districtOption);
+                });
+            });
+        });
+
+        // 当选择区县时，更新区县标签
+        $('#district-menu').on('click', 'li', function () {
+            var selectedDistrict = $(this).text();
+            $('#district-menu').prev().text(selectedDistrict + ' ▼');  // 更新区县标签
+        });
+    });
+</script>
 
 <footer class="footer">
     <p> 2021级软件工程03班FangHeng. All Rights Reserved.</p>
